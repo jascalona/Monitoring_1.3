@@ -1,0 +1,47 @@
+.container-form-r{
+    background: #a5b4f517;
+    max-width: 600px;
+    margin: 2% auto;
+    color: #fff;
+    padding: 50px;
+    border-radius: 20px;
+}
+
+.container-form-r h6{
+    font-size: 35px;
+    font-weight: 800;
+}
+
+.top{
+    text-align: center;
+}
+
+.mb-3{
+    padding: 10px;
+}
+
+
+.modal-footer button{
+    margin: 7px;
+    color: #fff;
+}
+
+.modal-footer button a{
+    text-decoration: none;
+    color: #fff;
+}
+
+@media (max-width: 650px) {
+    .container-form-r{
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 10px;
+    }
+    .container-form-r h6{
+        font-size: 25px;
+    }
+
+    .container-form-r small{
+        font-size: 13px;
+    }
+}
