@@ -24,7 +24,7 @@
 <?php
 
     $conexion = mysqli_connect("localhost","root", "", "gxdeve_apps", "3306");
-    $sql=" SELECT *FROM m_Uload ";
+    $sql=" SELECT *FROM m_Uload WHERE surname='escalona' ORDER BY DATE DESC ";
     $execute=mysqli_query($conexion, $sql);
     while ($fila=mysqli_fetch_array($execute)) {
 
@@ -34,7 +34,6 @@
 
 ?>
     <tr>
-        <td><?php echo $fila[0]?></td>
         <td><?php echo $fila[1]?></td>
         <td><?php echo $fila[2]?></td>
         <td><?php echo $fila[3]?></td>
@@ -46,8 +45,8 @@
         <td>N\A</td>
         <td><?php echo $fila[8]?></td>        
         <td><?php echo $fila[9]?></td>        
-        <td><?php echo $fila[10]?></td>        
-
+        <td><?php echo $fila[10]?></td>     
+        <td><?php echo $fila[11]?></td>        
     </tr>
 
 <?php } ?>

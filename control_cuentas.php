@@ -1,4 +1,7 @@
 <?php
+
+use Pdo\Mysql;
+
 session_start();
 if (!empty($_SESSION["CI"])) {
     header("loaction: ./index.php");
@@ -166,13 +169,38 @@ include "./CONTROLLER/conexion.php";
                                             <p>
 
                                             <div class="btn-export">
+
+
                                                 <form action="" method="POST">
-                                                    <button name="export" class="btn btn-dark">
+
+                                                    <!--SYSTEM FILTER-->
+                                                    <select class="form-select" aria-label="Default select example">
+                                                    <option selected>Seleccione un valor</option>
+
+
+                                                        <?php include "./CONTROLLER/conexion.php";
+
+                                                        $select = $conexion->prepare("SELECT *FROM m_user_lg ORDER BY surname");
+                                                        $select->execute();
+                                                        
+                                                        while($row_user= $select->fetch()){
+                                                            ?>
+
+                                                        <option value="<?= $row_user['surname']?>"><?php echo $row_user['surname']?></option>
+                                                    
+                                                    <?php }?>
+
+                                                    </select>
+                                                    <!--SYSTEM FILTER-->
+                                                    <br>
+
+                                                    <button type="submit" value="submit" name="export" class="btn btn-dark">
                                                         <a style="color: #fff; text-decoration: none;"
                                                             href="./CONTROLLER/export_data.php">Exportar Datos <i
                                                                 class='bx bx-export'></i></a>
                                                     </button>
                                                 </form>
+
                                             </div>
 
                                             <hr>
@@ -298,38 +326,38 @@ include "./CONTROLLER/conexion.php";
 
                         $statement = Conexion::conectar()->prepare("SELECT * FROM $table ORDER BY DATE $mode LIMIT $init, $max");
                         $statement->execute();
-          
+
                         $cont_table_tbody = $statement->fetchAll();
-          
+
                         if (is_array($cont_table_tbody) || is_object($cont_table_tbody)) {
-          
-                          for ($i = 0; $i < count($cont_table_tbody); $i ++) {
 
-                                    echo
-                                        '
-                                    <tr>
-                                        <td>'.$cont_table_tbody[$i]['ci'].'</td>' .
-                                        '<td>' .$cont_table_tbody[$i]['name']. '</td>' .
-                                        '<td>' .$cont_table_tbody[$i]['surname']. '</td>' .
-                                        '<td>' .$cont_table_tbody[$i]['customer'].'</td>' .
-                                        '<td>' .$cont_table_tbody[$i]['status']. '</td>' .
-                                        '<td>' .$cont_table_tbody[$i]['date']. '</td>' .
-                                        '<td>' .$cont_table_tbody[$i]['time']. '</td>' .
-                                        '<td>' .$cont_table_tbody[$i]['location']. '</td>' .
-                                        '<td>' .$cont_table_tbody[$i]['cargo']. '</td>' .
-                                        '<td>' .$cont_table_tbody[$i]['credenciales']. '</td>' .
-                                        '<td>' .$cont_table_tbody[$i]['departamento']. '</td>' .
+                            for ($i = 0; $i < count($cont_table_tbody); $i++) {
 
-                                        '</tr>
+                                echo
                                     '
-                                    ;  
-                                }
+                                    <tr>
+                                        <td>' . $cont_table_tbody[$i]['ci'] . '</td>' .
+                                    '<td>' . $cont_table_tbody[$i]['name'] . '</td>' .
+                                    '<td>' . $cont_table_tbody[$i]['surname'] . '</td>' .
+                                    '<td>' . $cont_table_tbody[$i]['customer'] . '</td>' .
+                                    '<td>' . $cont_table_tbody[$i]['status'] . '</td>' .
+                                    '<td>' . $cont_table_tbody[$i]['date'] . '</td>' .
+                                    '<td>' . $cont_table_tbody[$i]['time'] . '</td>' .
+                                    '<td>' . $cont_table_tbody[$i]['location'] . '</td>' .
+                                    '<td>' . $cont_table_tbody[$i]['cargo'] . '</td>' .
+                                    '<td>' . $cont_table_tbody[$i]['credenciales'] . '</td>' .
+                                    '<td>' . $cont_table_tbody[$i]['departamento'] . '</td>' .
 
-                            } else {
-                                echo '<script>alert("Hay un Error, Comuniquese con el Adminsitrador del Sistema!")</script>';
+                                    '</tr>
+                                    '
+                                ;
                             }
 
-                            ?>
+                        } else {
+                            echo '<script>alert("Hay un Error, Comuniquese con el Adminsitrador del Sistema!")</script>';
+                        }
+
+                        ?>
 
                     </tbody>
 
@@ -380,12 +408,12 @@ include "./CONTROLLER/conexion.php";
 
                     if ($ruta1 == $i) {
 
-                    echo '<li class="page-item"><a class="page-link active" href=" ' . $ruta . '?ruta=' . $i . ' ">' . $i . '</a></li>';
+                        echo '<li class="page-item"><a class="page-link active" href=" ' . $ruta . '?ruta=' . $i . ' ">' . $i . '</a></li>';
 
 
                     } else {
 
-                    echo '
+                        echo '
 
                     <li class="page-item"><a class="page-link" href=" ' . $ruta . '?ruta=' . $i . ' ">' . $i . '</a></li>';
 
