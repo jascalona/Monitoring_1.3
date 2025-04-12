@@ -180,13 +180,11 @@ include "./CONTROLLER/conexion.php";
 
                                                         <?php include "./CONTROLLER/conexion.php";
 
-                                                        $select = $conexion->prepare("SELECT *FROM m_user_lg ORDER BY surname");
-                                                        $select->execute();
+                                                        $select = $conexion->query("SELECT *FROM m_user_lg ORDER BY surname");
                                                         
-                                                        while($row_user= $select->fetch()){
-                                                            ?>
+                                                        while($row_user= $select->fetch_assoc()) { ?>
 
-                                                        <option value="<?= $row_user['surname']?>"><?php echo $row_user['surname']?></option>
+                                                        <option value="<?php echo $row_user['ci'] ?>"><?php echo $row_user['surname']?></option>
                                                     
                                                     <?php }?>
 
