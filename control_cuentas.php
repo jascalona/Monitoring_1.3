@@ -171,33 +171,10 @@ include "./CONTROLLER/conexion.php";
                                             <div class="btn-export">
 
 
-                                                <form action="" method="POST">
-
-                                                    <!--SYSTEM FILTER-->
-                                                    <select class="form-select" aria-label="Default select example">
-                                                    <option selected>Seleccione un valor</option>
-
-
-                                                        <?php include "./CONTROLLER/conexion.php";
-
-                                                        $select = $conexion->query("SELECT *FROM m_user_lg ORDER BY surname");
-                                                        
-                                                        while($row_user= $select->fetch_assoc()) { ?>
-
-                                                        <option value="<?php echo $row_user['ci'] ?>"><?php echo $row_user['surname']?></option>
-                                                    
-                                                    <?php }?>
-
-                                                    </select>
-                                                    <!--SYSTEM FILTER-->
-                                                    <br>
-
-                                                    <button type="submit" value="submit" name="export" class="btn btn-dark">
-                                                        <a style="color: #fff; text-decoration: none;"
-                                                            href="./CONTROLLER/export_data.php">Exportar Datos <i
-                                                                class='bx bx-export'></i></a>
-                                                    </button>
-                                                </form>
+                                                    <form method="post" class="form" action="./CONTROLLER/export_data.php">
+                                                        <input type="text" name="surname">
+                                                        <input type="submit" value="generar">
+                                                    </form>
 
                                             </div>
 

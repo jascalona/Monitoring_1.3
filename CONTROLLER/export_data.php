@@ -1,5 +1,12 @@
 <?php
-	header("Content-Type: application/xls");    
+
+    $surname = $_POST['surname'];
+
+    if (empty($_POST['generar'])) {
+        echo '<script>alert("pendejo")</script>';
+    
+
+    header("Content-Type: application/xls");    
 	header("Content-Disposition: attachment; filename=control_asistencia_" . date('Y:m:d:m:s').".xls");
 
 ?>
@@ -24,12 +31,9 @@
 <?php
 
     $conexion = mysqli_connect("localhost","root", "", "gxdeve_apps", "3306");
-    $sql=" SELECT *FROM m_Uload WHERE surname='escalona' ORDER BY DATE DESC ";
+    $sql=" SELECT *FROM m_Uload WHERE surname='$surname' ORDER BY DATE DESC ";
     $execute=mysqli_query($conexion, $sql);
     while ($fila=mysqli_fetch_array($execute)) {
-
-
-
         
 
 ?>
@@ -53,3 +57,7 @@
 
 
     </table>
+
+   <?php }
+   
+   ?>
